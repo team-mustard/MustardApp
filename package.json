@@ -1,32 +1,44 @@
 {
-  "name": "vuelunchifier",
+  "name": "team-mustard",
   "version": "1.0.0",
-  "description": "My first Vue app",
+  "description": "Team Mustard day picker",
   "author": "Katrina Renwick",
   "license": "ISC",
   "private": true,
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "start": "parcel public/index.html -p 3000 --open",
-    "build": "parcel build public/index.html"
+    "start": "node dist/server/index.js",
+    "prebuild": "npm run clean",
+    "build:client": "parcel build src/client/index.html --out-dir dist/client",
+    "build:server": "parcel build src/server/index.js --target=node --out-dir dist/server",
+    "build": "npm run build:client && npm run build:server",
+    "clean": "rimraf dist",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "parcel watch src/client/index.html --out-dir dist/client",
+    "dev:server": "parcel watch src/server/index.js --target=node --out-dir dist/server"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.21",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
     "pixi.js": "^5.0.4",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.3",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.3",
     "@vue/component-compiler-utils": "^3.0.0",
     "autoprefixer": "^9.6.4",
+    "concurrently": "^5.0.0",
     "eslint": "^6.5.1",
     "eslint-plugin-vue": "^5.2.3",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-eslint": "^1.0.7",
+    "parcel-plugin-run-server": "^1.1.2",
+    "rimraf": "^3.0.0",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
