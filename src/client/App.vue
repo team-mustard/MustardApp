@@ -14,10 +14,10 @@
 
     <b-container>
       <b-row>
-        <b-col>
+        <b-col sm='12' md='6'>
           <SpinWheel v-if='dayOptions' :segments='dayOptions' class='dayWheel' />
         </b-col>
-        <b-col>
+        <b-col sm='12' md='6'>
           <div v-if='selectedDay'>
             <b-card :title='selectedDay.label' :img-src='selectedDay.img' style='max-width: 30rem; margin: auto;'>
               <b-card-text>{{selectedDay.info}}</b-card-text>
@@ -64,7 +64,6 @@ export default {
 
 <style>
 .dayWheel {
-  width: 30rem;
-  height: 30rem;
+  width: 100%;
 }
 </style>
