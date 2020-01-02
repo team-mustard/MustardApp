@@ -30,7 +30,7 @@ app.get('/api/mustardDay', async (req, res) => {
   }
 })
 
-app.post('/api/days/actions/pick', async (req, res) => {
+app.post('/api/mustardDay/actions/pick', async (req, res) => {
   try {
     const mustardDay = await calendar.setMustardDay(new Date())
     res.send(mustardDay)
