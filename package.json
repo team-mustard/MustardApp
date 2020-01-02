@@ -29,7 +29,9 @@
     "moment": "^2.24.0",
     "pixi.js": "^5.0.4",
     "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "winston": "^3.2.1",
+    "winston-azure-application-insights": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

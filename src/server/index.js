@@ -1,15 +1,8 @@
-const appInsights = require('applicationinsights')
-try {
-  appInsights.setup()
-  appInsights.start()
-} catch (e) {
-  console.warn('Failed to start Application Insights.')
-}
-
 import express from 'express'
 import path from 'path'
 import calendar from './calendar.js'
 import { dayOptions } from './store.js'
+import logger from './logger.js'
 
 const app = express()
 
@@ -32,7 +25,7 @@ app.get('/api/mustardDay', async (req, res) => {
     const mustardDay = await calendar.getMustardDay(new Date())
     res.send(mustardDay)
   } catch (e) {
-    console.error(e)
+    logger.error(e)
     res.sendStatus(500)
   }
 })
@@ -42,7 +35,7 @@ app.post('/api/days/actions/pick', async (req, res) => {
     const mustardDay = await calendar.setMustardDay(new Date())
     res.send(mustardDay)
   } catch (e) {
-    console.error(e)
+    logger.error(e)
     res.sendStatus(500)
   }
 })
@@ -53,5 +46,5 @@ app.use(express.static(app.get('client')))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`Listening on port ${port}...`)
+  logger.info(`Listening on port ${port}...`)
 })

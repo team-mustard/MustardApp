@@ -1,3 +1,4 @@
+import logger from './logger.js'
 import keyvault from './azure/keyvault.js'
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
       return keyvaultSecret
     }
 
-    console.log(`No such secret: ${name}.`)
+    logger.warn(`No such secret: ${name}.`)
     return null
   }
 }
