@@ -1,5 +1,6 @@
 import { google } from 'googleapis'
 import settings from '../settings.js'
+import secrets from '../secrets.js'
 
 const calendar = google.calendar('v3')
 
@@ -78,7 +79,7 @@ var jwtClient = null
 async function getClient () {
   if (jwtClient === null) {
     const clientEmail = await settings.getSetting('GOOGLE_CLIENT_EMAIL')
-    const privateKey = await settings.getSecretSetting('GOOGLE_PRIVATE_KEY')
+    const privateKey = await secrets.getSecret('GOOGLE_PRIVATE_KEY')
 
     const scopes = ['https://www.googleapis.com/auth/calendar']
 
