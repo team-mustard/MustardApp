@@ -9,8 +9,7 @@ module.exports = {
 
     const secretName = name.replace(/_/g, '-')
     const secret = await client.getSecret(secretName)
-    logger.debug(secret)
-    return null
+    return secret.value
   }
 }
 
