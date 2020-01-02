@@ -54,7 +54,7 @@ export default {
       this.dayOptions = jsonData
     },
     pickTeamMustardDay: async function () {
-      const response = await fetch('/api/days/actions/pick', { method: 'POST' })
+      const response = await fetch('/api/mustardDay/actions/pick', { method: 'POST' })
       const jsonData = await response.json()
       this.selectedDay = jsonData
     }
