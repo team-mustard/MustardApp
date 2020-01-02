@@ -1,3 +1,11 @@
+const appInsights = require('applicationinsights')
+try {
+  appInsights.setup()
+  appInsights.start()
+} catch (e) {
+  console.warn('Failed to start Application Insights.')
+}
+
 import express from 'express'
 import path from 'path'
 import calendar from './calendar.js'
