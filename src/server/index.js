@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import calendar from './calendar.js'
 import { dayOptions } from './store.js'
 
 const app = express()
@@ -14,13 +15,28 @@ app.get('/api/days/:dayId', (req, res) => {
   if (day) {
     res.send(day)
   } else {
-    res.status(404).send()
+    res.sendStatus(404)
   }
 })
 
-app.post('/api/days/actions/pick', (req, res) => {
-  const selectedDay = dayOptions[Math.floor(Math.random() * dayOptions.length)]
-  res.send(selectedDay)
+app.get('/api/mustardDay', async (req, res) => {
+  try {
+    const mustardDay = await calendar.getMustardDay(new Date())
+    res.send(mustardDay)
+  } catch (e) {
+    console.error(e)
+    res.sendStatus(500)
+  }
+})
+
+app.post('/api/days/actions/pick', async (req, res) => {
+  try {
+    const mustardDay = await calendar.setMustardDay(new Date())
+    res.send(mustardDay)
+  } catch (e) {
+    console.error(e)
+    res.sendStatus(500)
+  }
 })
 
 // Serve client out of the dist folder
