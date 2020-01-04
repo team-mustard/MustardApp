@@ -17,14 +17,21 @@
     "dev:server": "parcel watch src/server/index.js --target=node --out-dir dist/server"
   },
   "dependencies": {
+    "@azure/identity": "^1.0.2",
+    "@azure/keyvault-secrets": "^4.0.2",
+    "applicationinsights": "^1.6.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.21",
     "core-js": "^2.6.5",
     "express": "^4.17.1",
     "fetch": "^1.1.0",
+    "googleapis": "^39.2.0",
+    "moment": "^2.24.0",
     "pixi.js": "^5.0.4",
     "vue": "^2.6.10",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "winston": "^3.2.1",
+    "winston-azure-application-insights": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",

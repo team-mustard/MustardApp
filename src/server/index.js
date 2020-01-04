@@ -1,6 +1,8 @@
 import express from 'express'
 import path from 'path'
+import calendar from './calendar.js'
 import { dayOptions } from './store.js'
+import logger from './logger.js'
 
 const app = express()
 
@@ -14,13 +16,28 @@ app.get('/api/days/:dayId', (req, res) => {
   if (day) {
     res.send(day)
   } else {
-    res.status(404).send()
+    res.sendStatus(404)
   }
 })
 
-app.post('/api/days/actions/pick', (req, res) => {
-  const selectedDay = dayOptions[Math.floor(Math.random() * dayOptions.length)]
-  res.send(selectedDay)
+app.get('/api/mustardDay', async (req, res) => {
+  try {
+    const mustardDay = await calendar.getMustardDay(new Date())
+    res.send(mustardDay)
+  } catch (e) {
+    logger.error(e)
+    res.sendStatus(500)
+  }
+})
+
+app.post('/api/mustardDay/actions/pick', async (req, res) => {
+  try {
+    const mustardDay = await calendar.setMustardDay(new Date())
+    res.send(mustardDay)
+  } catch (e) {
+    logger.error(e)
+    res.sendStatus(500)
+  }
 })
 
 // Serve client out of the dist folder
@@ -29,5 +46,5 @@ app.use(express.static(app.get('client')))
 
 const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`Listening on port ${port}...`)
+  logger.info(`Listening on port ${port}...`)
 })
