@@ -74,7 +74,7 @@ stages:
     dependsOn: Build
     condition: succeeded()
     jobs:
-      - deployment: TeamMustard-Linux
+      - deployment: TeamMustard_Linux
         environment: $(environmentName)
         pool:
           vmImage: $(vmImageName)
