@@ -5,24 +5,24 @@ import secrets from '../secrets.js'
 const calendar = google.calendar('v3')
 
 module.exports = {
-  async createCalendar (calendarId, summary, description = null) {
+  async createCalendar(calendarId, summary, description = null) {
     const client = await getClient()
     const response = await calendar.calendars.insert({
       auth: client,
       requestBody: {
-        description: description,
-        summary: summary
+        description,
+        summary
       }
     })
   },
 
-  async grantAccess (calendarId, userEmail, role = 'reader') {
+  async grantAccess(calendarId, userEmail, role = 'reader') {
     const client = await getClient()
     const response = await calendar.acl.insert({
       auth: client,
-      calendarId: calendarId,
+      calendarId,
       requestBody: {
-        role: role,
+        role,
         scope: {
           type: 'user',
           value: userEmail
@@ -30,12 +30,12 @@ module.exports = {
       }
     })
   },
-  
-  async getEvents (calendarId, start, end) {
+
+  async getEvents(calendarId, start, end) {
     const client = await getClient()
     const response = await calendar.events.list({
       auth: client,
-      calendarId: calendarId,
+      calendarId,
       timeMin: start,
       timeMax: end
     })
@@ -43,20 +43,20 @@ module.exports = {
     return response.data.items
   },
 
-  async createEvent (calendarId, date, summary, description = null) {
+  async createEvent(calendarId, date, summary, description = null) {
     const client = await getClient()
     const response = await calendar.events.insert({
       auth: client,
-      calendarId: calendarId,
+      calendarId,
       requestBody: {
-        description: description,
+        description,
         end: {
-          date: date
+          date
         },
         start: {
-          date: date
+          date
         },
-        summary: summary,
+        summary,
         transparency: 'transparent'
       }
     })
@@ -64,33 +64,28 @@ module.exports = {
     return response.data
   },
 
-  async deleteEvent (calendarId, eventId) {
+  async deleteEvent(calendarId, eventId) {
     const client = await getClient()
     const response = await calendar.events.delete({
       auth: client,
-      calendarId: calendarId,
-      eventId: eventId
+      calendarId,
+      eventId
     })
   }
 }
 
-var jwtClient = null
+let jwtClient = null
 
-async function getClient () {
+async function getClient() {
   if (jwtClient === null) {
     const clientEmail = await settings.getSetting('GOOGLE_CLIENT_EMAIL')
     const privateKey = await secrets.getSecret('GOOGLE_PRIVATE_KEY')
 
     const scopes = ['https://www.googleapis.com/auth/calendar']
 
-    jwtClient = new google.auth.JWT(
-      clientEmail,
-      null,
-      privateKey,
-      scopes
-    )
+    jwtClient = new google.auth.JWT(clientEmail, null, privateKey, scopes)
 
-    await jwtClient.authorize((error) => {
+    await jwtClient.authorize(error => {
       if (error) {
         throw error
       }
