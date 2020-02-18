@@ -1,10 +1,10 @@
 import { DefaultAzureCredential } from '@azure/identity'
 import { SecretClient } from '@azure/keyvault-secrets'
-import logger from '../logger.js'
-import settings from '../settings.js'
+// import logger from '../logger.js'
+import settings from '../settings'
 
 module.exports = {
-  async getSecret (name) {
+  async getSecret(name) {
     const client = await getSecretClient()
 
     const secretName = name.replace(/_/g, '-')
@@ -13,9 +13,9 @@ module.exports = {
   }
 }
 
-var secretClient = null
+let secretClient = null
 
-async function getSecretClient () {
+async function getSecretClient() {
   if (secretClient === null) {
     const keyVaultName = await settings.getSetting('KEYVAULT_NAME')
     const keyVaultUri = `https://${keyVaultName}.vault.azure.net`
