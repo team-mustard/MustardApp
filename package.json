@@ -27,7 +27,7 @@
     "fetch": "^1.1.0",
     "googleapis": "^39.2.0",
     "moment": "^2.24.0",
-    "pixi.js": "^5.0.4",
+    "pixi.js": "^5.2.1",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
     "winston": "^3.2.1",
