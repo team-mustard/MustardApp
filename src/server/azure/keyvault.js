@@ -1,6 +1,5 @@
 import { DefaultAzureCredential } from '@azure/identity'
 import { SecretClient } from '@azure/keyvault-secrets'
-import logger from '../logger.js'
 import settings from '../settings.js'
 
 module.exports = {
