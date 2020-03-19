@@ -7,7 +7,7 @@ const calendar = google.calendar('v3')
 module.exports = {
   async createCalendar (calendarId, summary, description = null) {
     const client = await getClient()
-    const response = await calendar.calendars.insert({
+    await calendar.calendars.insert({
       auth: client,
       requestBody: {
         description: description,
@@ -18,7 +18,7 @@ module.exports = {
 
   async grantAccess (calendarId, userEmail, role = 'reader') {
     const client = await getClient()
-    const response = await calendar.acl.insert({
+    await calendar.acl.insert({
       auth: client,
       calendarId: calendarId,
       requestBody: {
@@ -66,7 +66,7 @@ module.exports = {
 
   async deleteEvent (calendarId, eventId) {
     const client = await getClient()
-    const response = await calendar.events.delete({
+    await calendar.events.delete({
       auth: client,
       calendarId: calendarId,
       eventId: eventId
