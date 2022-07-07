@@ -26,7 +26,7 @@
     "express": "^4.17.1",
     "fetch": "^1.1.0",
     "googleapis": "^47.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "pixi.js": "^5.2.1",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
